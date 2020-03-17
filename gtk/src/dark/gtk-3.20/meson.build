@@ -150,8 +150,6 @@ gtk3_assets = [
   'assets/text-select-start.png',
 ]
 
-# Do not sync this part with master
-
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.20
 generated_css = []
@@ -176,7 +174,7 @@ gresource_xml = configure_file(
   output: 'gtk.gresource.xml',
   configuration: conf_data)
 
-gnome.compile_resources('dark-gtk', gresource_xml,
+gnome.compile_resources('gtk', gresource_xml,
   gresource_bundle: true,
   dependencies: generated_css,
   install: true,
@@ -185,4 +183,3 @@ gnome.compile_resources('dark-gtk', gresource_xml,
 
 # Install stub CSS files
 install_data(['gtk.css'], install_dir: gtk3_dir)
-meson.add_install_script('../../post_install.py', get_option('datadir'), meson.project_name(), 'dark')

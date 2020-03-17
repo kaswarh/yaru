@@ -169,16 +169,11 @@ gtk3_assets = [
   'assets/text-select-start.png',
 ]
 
-# Do not sync this part with master
-
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.0
 generated_css = []
 foreach f : gtk3_scss_sources
-
-  target = 'dark-gtk-3.0-' + f + '-generated.css'
-  message('generating: ' + target)
-  generated_css += custom_target(target,
+  generated_css += custom_target('gtk-3.0-' + f + '-generated.css',
       input: f + '.scss',
       output: f + '-dark-generated.css',
       depend_files: files(gtk3_scss_dependencies),
@@ -203,12 +198,12 @@ gresource_xml = configure_file(
 # the bundle with the correct name.
 #  https://github.com/mesonbuild/meson/issues/4477
 
-gresource = gnome.compile_resources('dark-gtk30', gresource_xml,
+gresource = gnome.compile_resources('gtk30', gresource_xml,
   gresource_bundle: true,
   dependencies: generated_css,
 )
 
-custom_target('dark-gtk-3.0.gresource',
+custom_target('gtk-3.0.gresource',
   input: gresource,
   output: 'gtk.gresource',
   command: ['cp', '@INPUT@', '@OUTPUT@'],

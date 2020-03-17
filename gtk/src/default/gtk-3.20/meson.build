@@ -151,13 +151,11 @@ gtk3_assets = [
   'assets/text-select-start.png',
 ]
 
-# Do not sync this part with master
-
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.20
 generated_css = []
 foreach f : gtk3_scss_sources
-  generated_css += custom_target('gtk-3.20-' + f + '-generated.css',
+  generated_css += custom_target('light-gtk-3.20-' + f + '-generated.css',
       input: f + '.scss',
       output: f + '-generated.css',
       depend_files: files(gtk3_scss_dependencies),

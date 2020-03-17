@@ -170,15 +170,11 @@ gtk3_assets = [
   'assets/text-select-start.png',
 ]
 
-# Do not sync this part with master
-
 # generate .css files
 # and install to themes/THEMENAME/gtk-3.0
 generated_css = []
 foreach f : gtk3_scss_sources
-  target = 'gtk-3.0-' + f + '-generated.css'
-  message('generating: ' + target)
-  generated_css += custom_target(target,
+  generated_css += custom_target('light-gtk-3.0-' + f + '-generated.css',
       input: f + '.scss',
       output: f + '-generated.css',
       depend_files: files(gtk3_scss_dependencies),
@@ -208,7 +204,7 @@ gresource = gnome.compile_resources('gtk30', gresource_xml,
   dependencies: generated_css,
 )
 
-custom_target('gtk-3.0-gtk.gresource',
+custom_target('light-gtk-3.0-gtk.gresource',
   input: gresource,
   output: 'gtk.gresource',
   command: ['cp', '@INPUT@', '@OUTPUT@'],
